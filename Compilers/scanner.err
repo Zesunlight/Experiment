@@ -1,0 +1,6 @@
+***LINE:1  expected 'begin' of main process
+***LINE:2  expected 'integer' of this caption
+***LINE:9  'readm' undeclared(in this function)
+***LINE:9  expected ':='
+***LINE:9  not a valid factor
+***LINE:10  expected an 'end' of main process

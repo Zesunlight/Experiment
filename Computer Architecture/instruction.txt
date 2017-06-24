@@ -1,0 +1,17 @@
+add r1,r2,r3
+and r4,r5,r6
+or r7,r8,r9
+xor r0,r0,r0
+sra r10,r11,8
+srl r12,r13,4
+sll r14,r15,2
+addi r16,r17,-256
+andi r18,r19,64
+ori r20,r21,127
+xori r22,r23,16
+load r24,-31(r25)
+store r26,63(r27)
+beq r27,r28,1
+bne r29,r30,-1
+jump 1048575
+zyz

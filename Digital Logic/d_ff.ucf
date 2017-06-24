@@ -1,0 +1,10 @@
+NET CLK	LOC=V10;
+
+#Switch
+NET CLR_L  LOC= T10; #SW0
+NET PR_L   LOC= T9; #SW1
+NET D      LOC= V9; #SW2
+
+#Led
+NET QN LOC=U16; #LD0
+NET Q  LOC=V16; #LD1

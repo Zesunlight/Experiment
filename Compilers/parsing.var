@@ -1,0 +1,4 @@
+    name    type    proc   level    kind address
+       k    ints       0       0       1       1
+       n    ints       1       1       1       2
+       n    ints       1       1       0       3
