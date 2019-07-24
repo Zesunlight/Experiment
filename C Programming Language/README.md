@@ -1,3 +1,3 @@
 some tiny things
 
-long long ago
+when I was a freshman
