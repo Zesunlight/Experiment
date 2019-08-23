@@ -10,6 +10,22 @@ def permutation(elements):
                 new_res.append(elements[p] + item)
         return new_res
 
+def permute2(nums):
+    if len(nums) == 0:
+        return []
+    elif len(nums) == 1:
+        return [[nums[0]]]
+
+    res = []
+    insert = [nums[0]]
+    small = self.permute2(nums[1:])
+
+    for item in small:
+        for i in range(len(item) + 1):
+            res.append(item[:i] + insert + item[i:])
+
+    return res
+
 
 if __name__ == '__main__':
     e = [str(i) for i in range(3)]
