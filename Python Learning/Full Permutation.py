@@ -26,6 +26,11 @@ def permute2(nums):
 
     return res
 
+def permute3(items):
+    from itertools import permutations
+
+    return list(permutations(items, len(items)))
+
 
 if __name__ == '__main__':
     e = [str(i) for i in range(3)]
