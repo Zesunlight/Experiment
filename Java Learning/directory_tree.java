@@ -25,7 +25,7 @@ public class Main {
     private static HashMap<String, HashMap> tree(String path) throws Exception {
         File file = new File(path);
         File[] files = file.listFiles();
-        HashMap<String, HashMap> tree = new HashMap<>();
+        HashMap<String, HashMap> content = new HashMap<>();
 
         String[] pathSplit = path.split("\\\\");  // Win
         String dirName = pathSplit[pathSplit.length - 1];
@@ -33,8 +33,6 @@ public class Main {
         if (files == null) {
             throw new Exception("invalid path");
         } else {
-            HashMap<String, HashMap> content = new HashMap<>();
-            tree.put(dirName, content);
             content.put("Directory", new HashMap<>());
             content.put("File", new HashMap<>());
 
