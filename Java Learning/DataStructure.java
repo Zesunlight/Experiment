@@ -45,6 +45,10 @@ public class DataStructure {
 
         String remove = map.remove(3);  // three (同时会改变 value)
         boolean success = map.remove(2, "one");  // false
+        for (Integer key : map.keySet()) {
+            System.out.print(key);
+            System.out.print(map.get(key));
+        }
 
 
         // -------------------- Set --------------------
@@ -98,16 +102,22 @@ public class DataStructure {
 
         // -------------------- PriorityQueue --------------------
         Queue<User> prq = new PriorityQueue<>(new UserComparator());  // 默认实现了最小堆
+        Queue<User> prq2 = new PriorityQueue<>(Comparator.comparing(User::getName)
+                .thenComparing(User::getNumber, (s, t) -> {
+                    return Integer.compare(s.length(), t.length());
+                }));
+        Queue<User> prq3 = new PriorityQueue<>(Comparator.comparing(User::getName, (s, t) -> Integer.compare(s.length(), t.length()))
+                .thenComparing(User::getNumber, Comparator.comparingInt(String::length)));
         // 或者提供 Comparator 对象来判断两个元素的顺序，里面重载 compare() 函数
 
         // 调用remove()或poll()方法，返回的总是优先级最高的元素
         // 可以用 remove(Object o) 来删除与给定对象相同的最先出队的对象
-
     }
 }
 
 
 class UserComparator implements Comparator<User> {
+    @Override
     public int compare(User u1, User u2) {
         if (u1.number.charAt(0) == u2.number.charAt(0)) {
             // 如果两人的号都是A开头或者都是V开头,比较号的大小:
@@ -129,6 +139,14 @@ class User {
     public User(String name, String number) {
         this.name = name;
         this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNumber() {
+        return number;
     }
 
     public String toString() {
