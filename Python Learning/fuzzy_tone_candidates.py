@@ -27,8 +27,20 @@ def fuzzy_tone(pinyin: str, dictionary: dict):
         pre.extend(['r', 'l', 'n'])
         candidate(suf, pinyin[1:])
 
+    rest = ['b', 'p', 'm', 'f', 'd', 't', 'g', 'k', 'h', 'j', 'q', 'x']
+    if pinyin[0] in rest:
+        pre.append(pinyin[0])
+        candidate(suf, pinyin[1:])
+
     result = set(''.join(i) for i in product(pre, suf))
-    return {pinyin} if len(result) == 0 else result
+
+    if (pinyin[0] in {'z', 's', 'c'}) and ('uan' in pinyin):
+        result.remove(pinyin[0] + 'uang')
+        # 若匹配 zhuang，得到的是 {'zuan', 'zhuang', 'zhuan', 'zuang'}
+        # 其实 zuang 这个拼音是不存在的，这里是为了处理这种情况
+
+    # return {pinyin} if len(result) == 0 else result
+    return result
 
 
 def add_rules(dictionary):
@@ -43,6 +55,11 @@ def add_rules(dictionary):
     dictionary['ong'].add('on')
     dictionary['on'].add('ong')
 
+    dictionary['uan'].add('uang')
+    dictionary['uang'].add('uan')
+    dictionary['ian'].add('iang')
+    dictionary['iang'].add('ian')
+
     dictionary['zh'].add('z')
     dictionary['z'].add('zh')
     dictionary['ch'].add('c')
@@ -52,7 +69,7 @@ def add_rules(dictionary):
 
 
 if __name__ == '__main__':
-    prefix = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's']
+    # prefix = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's']
     fuzzy = defaultdict(set)
     add_rules(fuzzy)
     py = input().strip()
