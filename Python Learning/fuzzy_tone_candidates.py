@@ -39,6 +39,16 @@ def fuzzy_tone(pinyin: str, dictionary: dict):
         # 若匹配 zhuang，得到的是 {'zuan', 'zhuang', 'zhuan', 'zuang'}
         # 其实 zuang 这个拼音是不存在的，这里是为了处理这种情况
 
+    if pinyin[0] in {'r', 'l', 'n'}:
+        # 去除不存在的声母、韵母组合
+        if 'uan' in pinyin:
+            result.remove('ruang')
+            result.remove('luang')
+            result.remove('nuang')
+        if 'ian' in pinyin:
+            result.remove('rian')
+            result.remove('riang')
+
     # return {pinyin} if len(result) == 0 else result
     return result
 
