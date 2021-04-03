@@ -20,6 +20,26 @@ CapsLock & ]:: Send ^#{right}
 CapsLock & WheelUp:: Send {Volume_Up}
 CapsLock & WheelDown:: Send {Volume_Down}
 
+; 鼠标放在任务栏，滚动滚轮实现音量的加减
+~WheelUp::  
+if (existclass("ahk_class Shell_TrayWnd")=1)  
+Send,{Volume_Up}  
+Return  
+~WheelDown::  
+if (existclass("ahk_class Shell_TrayWnd")=1)  
+Send,{Volume_Down}  
+Return 
+
+Existclass(class)  
+{  
+MouseGetPos,,,win  
+WinGet,winid,id,%class%  
+if win = %winid%  
+Return,1  
+Else  
+Return,0  
+}
+
 ; RAlt + wasd --> shift + ...
 RAlt & w:: Send +{up}
 RAlt & s:: Send +{down}
@@ -40,6 +60,7 @@ RAlt & t:: Winset, AlwaysOnTop, , A
 
 ; ::[原字符串]::[替代字符串]
 :*:/name::风雨替花愁
+::/bili::https://space.bilibili.com/6736573
 
 AppsKey::
 WinGetActiveTitle, Title
@@ -70,8 +91,6 @@ WinTransplus(w){
     WinGet, transparent, Transparent, ahk_id %w%
     if transparent < 255
         transparent := transparent+10
-    else
-        transparent =
     if transparent
         WinSet, Transparent, %transparent%, ahk_id %w%
     else
@@ -80,10 +99,8 @@ WinTransplus(w){
 }
 WinTransMinus(w){
     WinGet, transparent, Transparent, ahk_id %w%
-    if transparent
+    if transparent > 20
         transparent := transparent-10
-    else
-        transparent := 240
     WinSet, Transparent, %transparent%, ahk_id %w%
     return
 }
