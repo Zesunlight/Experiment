@@ -61,6 +61,7 @@ RAlt & t:: Winset, AlwaysOnTop, , A
 ; ::[原字符串]::[替代字符串]
 :*:/name::风雨替花愁
 ::/bili::https://space.bilibili.com/6736573
+::/video::https://www.bilibili.com/video/BV1Rb4y1S7hL
 
 AppsKey::
 WinGetActiveTitle, Title
