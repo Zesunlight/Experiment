@@ -52,8 +52,9 @@ RAlt & m::run C:\Program Files\Sublime Text 3\sublime_text.exe
 
 ; for left hand
 >#o:: run %A_Desktop%
+>#[:: run https://limestart.cn/
 RAlt & \:: AltTab
-RCtrl & /:: Send ^x
+RCtrl & .:: Send ^x
 
 ; let window in front of all
 RAlt & t:: Winset, AlwaysOnTop, , A
