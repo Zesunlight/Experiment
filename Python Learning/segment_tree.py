@@ -53,6 +53,7 @@ class SegTree:
         # 下标为index的元素变为value, 当前所在线段树的位置为pos, 覆盖范围[s, e]
         # 保证index在[s, e]中
         if start == end:
+            self.data[index] = value
             self.tree[pos] = value
         else:
             mid = (start + end) // 2
@@ -63,13 +64,37 @@ class SegTree:
             self.tree[pos] = self.tree[2*pos] + self.tree[2*pos+1]
 
     def build_max(self, start, end, pos=1):
-        pass
+        if start == end:
+            self.tree[pos] = self.data[start]
+        else:
+            mid = (start + end) // 2
+            self.build_max(start, mid, 2 * pos)
+            self.build_max(mid + 1, end, 2 * pos + 1)
+            self.tree[pos] = max(self.tree[2 * pos], self.tree[2 * pos + 1])
 
     def get_max(self, start, end, left, right, pos):
-        pass
+        if (left <= start) and (end <= right):
+            return tree[pos]
+
+        mid = (start + end) // 2
+        s = float('-inf')
+        if left <= mid:
+            s = max(s, self.get_max(start, mid, left, right, 2 * pos))
+        if mid < right:
+            s = max(s, self.get_max(mid + 1, end, left, right, 2 * pos + 1))
+        return s
 
     def update_max(self, index, value, start, end, pos):
-        pass
+        if start == end:
+            self.data[index] = value
+            self.tree[pos] = value
+        else:
+            mid = (start + end) // 2
+            if index <= mid:
+                self.update_max(index, value, start, mid, 2 * pos)
+            else:
+                self.update_max(index, value, mid + 1, end, 2 * pos + 1)
+            self.tree[pos] = max(self.tree[2 * pos], self.tree[2 * pos + 1])
 
 
 if __name__ == '__main__':
