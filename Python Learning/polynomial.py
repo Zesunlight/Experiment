@@ -3,6 +3,7 @@
 import re
 from collections import defaultdict
 from typing import List, DefaultDict
+from functools import cmp_to_key
 
 
 def init(discrete: List) -> DefaultDict[str, int]:
@@ -57,8 +58,23 @@ def add(left: DefaultDict[str, int], right: DefaultDict[str, int]) -> DefaultDic
 
 
 def poly_print(poly: DefaultDict[str, int]) -> str:
+
+    def power(k1, k2):
+        sk1 = sum([int(x) for x in list(filter(None, re.split("[a-zC]", k1)))])
+        sk2 = sum([int(x) for x in list(filter(None, re.split("[a-zC]", k2)))])
+        if sk1 > sk2:
+            return 1
+        elif sk1 == sk2:
+            if k1 > k2:
+                return 1
+            elif k1 == k2:
+                return 0
+            else:
+                return -1
+        return -1
+
     result = []
-    for k in sorted(poly.keys()):
+    for k in sorted(poly.keys(), key=cmp_to_key(power)):
         sl = list(filter(None, re.split("([a-zA-Z])", k)))
         temp = ""
         if poly[k] != 1:
